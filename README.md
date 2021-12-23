@@ -5,7 +5,7 @@ UPC - ESEIAAT - A.A. 2021\2022
 
 Author:
 
-          .o.       oooo                                                          .o8                    
+          .o.       oooo                                                          oo8                    
          .888.      `888                                                         .888                    
         .8"888.      888   .ooooo.   .oooo.o  .oooo.o  .oooo.   ooo. .oo.    .oooo888  oooo d8b  .ooooo. 
        .8' `888.     888  d88' `88b d88(  "8 d88(  "8 `P  )88b  `888P"Y88b  d88' `888  `888"8P  d88' `88b
