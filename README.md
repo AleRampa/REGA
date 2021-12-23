@@ -23,7 +23,7 @@ Author:
     o888o  o888o `Y888"8o  o888o o888o o888o  888bod8P' `Y888"8o d8888888P  d8888888P   `Y8bod8P'
                                               888                                                 
                                              o888o  
-*/
+
 To use REGA you must:
 
 - build your graph using for example yEd Graph Editor. Be aware that every
@@ -37,11 +37,13 @@ To use REGA you must:
   the one below:
 
 % Type	   Component number     mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]    composition
+
   Tank            1               93.677              3                 21	          70.220	       H2
 
   Or for example:
 
 % Type	  Component number	     p ratio            eta
+
   Pump            1                  29.1633            0.7
 
   For input block one must specify the whole state with mdot, pressure,
@@ -64,9 +66,9 @@ To use REGA you must:
   exit state (or the exit state related to the nExit-th exit if it is a
   splitter block) and results is a struct with whatever variable you want,
   for example pump block can output the power in this way:
-\`\`\`matlab
+
 results.power = <calculated_power>;
-\`\`\`
+
 The program will take care of printing the results correctly
 
 Be aware that states in all the functions are struct with these fields:
