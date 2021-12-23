@@ -23,7 +23,7 @@ Author:
     o888o  o888o `Y888"8o  o888o o888o o888o  888bod8P' `Y888"8o d8888888P  d8888888P   `Y8bod8P'
                                               888                                                 
                                              o888o  
-
+*/
 To use REGA you must:
 
 - build your graph using for example yEd Graph Editor. Be aware that every
@@ -64,9 +64,9 @@ To use REGA you must:
   exit state (or the exit state related to the nExit-th exit if it is a
   splitter block) and results is a struct with whatever variable you want,
   for example pump block can output the power in this way:
-
+\`\`\`matlab
 results.power = <calculated_power>;
-
+\`\`\`
 The program will take care of printing the results correctly
 
 Be aware that states in all the functions are struct with these fields:
