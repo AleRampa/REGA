@@ -38,13 +38,13 @@ To use REGA you must:
 
 % Type	   Component number     mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]    composition
 
-  Tank              1               93.677              3                 21	          70.220	       H2
+  Tank              1               93.677              3                21                  70.220              H2
 
   Or for example:
 
 % Type	  Component number	     p ratio            eta
 
-  Pump            1                  29.1633            0.7
+  Pump              1              29.1633            0.7
 
   For input block one must specify the whole state with mdot, pressure,
   temperature, density and composition as the name of the substance (only 
@@ -58,9 +58,9 @@ To use REGA you must:
 
 - Define the functions related to every block type by creating a matlab 
   function that takes as inputs:
-    o (state1,params) if the inputs are 1
-    o (state1,state2,params) if the inputs are 2
-    o (state1,nExit,params) if it's a splitter block which takes 1 input
+    * (state1,params) if the inputs are 1
+    * (state1,state2,params) if the inputs are 2
+    * (state1,nExit,params) if it's a splitter block which takes 1 input
 
   the function must output [state2,results], where state2 should be the
   exit state (or the exit state related to the nExit-th exit if it is a
