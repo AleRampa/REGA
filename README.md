@@ -57,8 +57,7 @@ To use REGA you must:
   as suggested from the command >> help REGA
 
 - Define the functions related to every block type by creating a matlab 
-  function that takes as inputs:
-  
+  function that takes as inputs: 
     o (state1,params) if the inputs are 1     
     o (state1,state2,params) if the inputs are 2 
     o (state1,nExit,params) if it's a splitter block which takes 1 input
