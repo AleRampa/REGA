@@ -38,7 +38,7 @@ To use REGA you must:
 
 % Type	   Component number     mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]    composition
 
-  Tank            1               93.677              3                 21	          70.220	       H2
+  Tank              1               93.677              3                 21	          70.220	       H2
 
   Or for example:
 
