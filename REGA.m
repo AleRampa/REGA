@@ -1,4 +1,4 @@
-%% - REGA
+%% - REGA v1.1
 % Rocket Engine Graph Analyzer (REGA)
 % © Alessandro Rampazzo
 % ESEIAAT - UPC - 2021/2022
@@ -61,7 +61,7 @@ for i = 1:2:length(varargin)
     if isa(varargin{i+1},'logical')
         options.(lower(varargin{i})) = varargin{i+1};
     else
-        error("log must be a bool") 
+        error("log must be a bool")
     end
 end
 
@@ -207,7 +207,7 @@ for i = 1:length(blocks)
             
             if options.logtravellednodes
                 % printing current node
-                disp(count+": " + compInfo(lower(string(compInfo(:,1))) == blocks{cn}.type,2) + " " + blocks{cn}.compN)               
+                disp(count+": " + compInfo(lower(string(compInfo(:,1))) == blocks{cn}.type,2) + " " + blocks{cn}.compN)
             end
             
             count = count + 1;
@@ -224,6 +224,8 @@ for i = 1:length(blocks)
             for t = 1:size(compInfo,1)
                 % if the type is in the component list
                 if lower(compInfo{t,1}) == blocks{cn}.type
+                    
+                    % =====================================================
                     
                     if blocks{cn}.nInput == 0 || blocks{cn}.nOutput == 0
                         % it is a input or output block, if there are no
@@ -246,7 +248,8 @@ for i = 1:length(blocks)
                             splitArray = splitArray(1:end-1);
                         end
                         
-                        
+                    % =====================================================
+                    
                     elseif blocks{cn}.nInput == 1 && blocks{cn}.nOutput == 1
                         % component with one input and one output
                         %
@@ -256,7 +259,12 @@ for i = 1:length(blocks)
                         checkFunctionHandle(f,blocks{cn}.type)
                         
                         % do the calculation for this block
-                        [states{end+1},results] = f(states{statesID == sID},blocks{cn}.params);
+                        fields = fieldnames(blocks{cn});
+                        if any(ismember(fields,'params'))
+                            [states{end+1},results] = f(states{statesID == sID},blocks{cn}.params);
+                        else
+                            [states{end+1},results] = f(states{statesID == sID});
+                        end
                         % add the results to the block
                         blocks{cn} = addResultsToBlock(blocks{cn},results);
                         
@@ -264,32 +272,35 @@ for i = 1:length(blocks)
                         [nn,sID] = findNextNode(blocks{cn}.nodeID,conns);
                         % add to the statesID vector the traversed state
                         statesID(end+1) = sID;
-                        
-                    elseif blocks{cn}.nInput == 2 && blocks{cn}.nOutput == 1
-                        % block with 2 inputs and 1 output
-                        %
+                    
+                    % =====================================================              
+                    
+                    elseif blocks{cn}.nInput > 1 && blocks{cn}.nOutput == 1
+                        % component like mixers or combustion chambers with
+                        % multiple input and one output
+                        %                        
                         % get the function handle of the component
                         f = compInfo{t,3};
                         % check if the function is valid
                         checkFunctionHandle(f,blocks{cn}.type)
                         
                         % find both the input states
-                        [stIn1,stIn2] = findInputStates(cn,conns);
-                        
-                        % if stIn2 is = -1 then the findInputStates cannot
-                        % find 2 input states
-                        if stIn2 == -1
-                            error("cannot find the input states of component %s %d,"+...
-                                "try checking the graph or the component definitions",...
-                                blocks{cn}.type,blocks{cn}.compN)
-                        end
+                        stInArr = findInputStates(cn,conns,blocks{cn}.nInput);                        
                         
                         % if they have been already calculated proceed,
                         % else return to the previous splitter block that
                         % has untravelled exits
-                        if ismember(stIn1,statesID) && ismember(stIn2,statesID)
-                            [states{end+1},results] = f(states{statesID == stIn1},states{statesID == stIn2},...
-                                blocks{cn}.params);
+                        if all(ismember(stInArr,statesID))
+                            states_vec = states{statesID == stInArr(1)};
+                            for j = 2:length(stInArr)
+                                states_vec = [states_vec,states{statesID == stInArr(j)}];
+                            end                            
+                            if any(ismember(fields,'params'))
+                                [states{end+1},results] = f(states_vec,...
+                                    blocks{cn}.params);
+                            else
+                                [states{end+1},results] = f(states_vec);                               
+                            end
                             % add the results to the block
                             blocks{cn} = addResultsToBlock(blocks{cn},results);
                             
@@ -313,6 +324,8 @@ for i = 1:length(blocks)
                             end
                         end
                         
+                    % =====================================================
+                        
                     elseif blocks{cn}.nInput == 1 && blocks{cn}.nOutput == 2
                         % block with 1 input and 2 outputs = splitter block
                         %
@@ -328,10 +341,14 @@ for i = 1:length(blocks)
                         end
                         
                         % find the input state
-                        stIn = findInputStates(cn,conns);
+                        stIn = findInputStates(cn,conns,1);
                         
                         % do all the calculation of the block
-                        [states{end+1},results] = f(states{statesID == stIn},nExit,blocks{cn}.params);
+                        if any(ismember(fields,'params'))
+                            [states{end+1},results] = f(states{statesID == stIn},nExit,blocks{cn}.params);
+                        else
+                            [states{end+1},results] = f(states{statesID == stIn},nExit);
+                        end
                         % add the results to the block
                         blocks{cn} = addResultsToBlock(blocks{cn},results);
                         
@@ -356,6 +373,10 @@ for i = 1:length(blocks)
             end
         end
     end
+end
+
+if ~exist('cn','var')
+    error('no input blocks found')
 end
 
 if options.logtravellednodes
@@ -432,25 +453,27 @@ fprintf("Finished traversing the graph\n")
 
 % find both the input states to a node (at the moment only two inputs are
 % implemented)
-    function [stIn1,stIn2] = findInputStates(node,conns)
+    function stInArr = findInputStates(node,conns,n0)
         % number of input
-        n0 = 2;
         n = n0;
         
-        stIn1 = -1;
-        stIn2 = -1;
+        stInArr = ones(1,n0)*-1;
         for c = 1:length(conns)
             if node == conns(c,2) && n > 1
-                stIn1 = conns(c,3);
+                stInArr(n0-n+1) = conns(c,3);
                 n = n - 1;
             elseif node == conns(c,2)
-                stIn2 = conns(c,3);
+                stInArr(n0-n+1) = conns(c,3);
                 break;
             end
         end
         
-        if stIn1 == -1
+        if all(stInArr(1) == -1)
             error('cannot find a node with this number')
+        elseif any(stInArr(1) == -1)
+            error("cannot find the input states of node %d,"+...
+                "try checking the graph or the component definitions",...
+                node)
         end
         
     end
@@ -481,9 +504,9 @@ fprintf("Finished traversing the graph\n")
     function block = addResultsToBlock(block,results)
         % adds all the field of results to the block struct
         if isstruct(results)
-            fields = fieldnames(results);
-            for ii = 1:length(fields)
-                block.(fields{ii}) = results.(fields{ii});
+            resultsFields = fieldnames(results);
+            for ii = 1:length(resultsFields)
+                block.(resultsFields{ii}) = results.(resultsFields{ii});
             end
             
         elseif isnumeric(results)
@@ -524,7 +547,7 @@ fprintf("Finished traversing the graph\n")
         end
     end
 
-%get the number of output of a node
+% get the number of output of a node
     function N = getOutputN(node,conns)
         N = 0;
         for ii = 1:length(conns)

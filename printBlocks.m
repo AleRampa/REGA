@@ -38,7 +38,7 @@ for i = 1:length(blocks)
             else
                 paramNames(1,end+1) = string(missing);
                 fields = fieldnames(blocks{i});
-                resultNames(length(fields(6:end)),end+1) = string(fields(6:end));
+                resultNames(1:length(fields(6:end)),end+1) = string(fields(6:end));
             end
         end
     end
@@ -47,8 +47,8 @@ end
 
 fprintf("Blocks:\n\n")
 
-fprintf("mdot is in [kg/s], p is in [bar], T is in K, rho is in kg/m^3,\n"+...
-    "powers are in MW and every other quantity is in SI units\n\n");
+fprintf("mdot is in [kg/s], p is in [bar], T is in [K], rho is in [kg/m^3],\n"+...
+    "powers are in [MW] and every other quantity is in SI units\n\n");
 nicknames = string(compInfo(:,[1,2]));
 nicknames(:,1) = lower(nicknames(:,1));
 
@@ -58,7 +58,6 @@ sp_head = [8,ones(1,20)*12];
 sp = [6,10,10,ones(1,20)*12];
 
 for i = 1:length(seenBlockTypes)
-    
     
     rem = 0;
     
