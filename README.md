@@ -1,4 +1,4 @@
-# REGA
+# REGA v1.1
 REGA (Rocket Engine Graph Analyzer) is a set of matlab function which 
 facilitate the thermodynamic analysis of a rocket engine by reading its graph
 
@@ -47,38 +47,40 @@ To use REGA you must:
   Pump              1              29.1633            0.7
 
   For input block one must specify the whole state with mdot, pressure,
-  temperature, density and composition as the name of the substance (only 
-  pure substances are allowed for now)
+  temperature, density and composition as a struct with the name of the
+  pure substances and the relative molar fractions
   The program will read through the file and will pass a vector containing
-  the specified parameters in the order they were given in the input file
-  to the relative function associated to the block 
+  the input states and the parameters specified in the input file in the
+  order they were given to the relative function associated to the block
 
 - Specify the names of the blocks, the nickname and the associated function
-  as suggested from the command >> help REGA
+  as suggested from the command ">> help REGA"
 
 - Define the functions related to every block type by creating a matlab 
   function that takes as inputs: 
   * (state1,params) if the inputs are 1     
-  * (state1,state2,params) if the inputs are 2 
-  * (state1,nExit,params) if it's a splitter block which takes 1 input
+  * ([state1,state2,...,stateN],params) if the inputs are > 1 (first 
+    argument is a struct array)
+  * (state1,nExit,params) if it's a splitter block that takes 1 input
 
-  the function must output [state2,results], where state2 should be the
-  exit state (or the exit state related to the nExit-th exit if it is a
-  splitter block) and results is a struct with whatever variable you want,
-  for example pump block can output the power in this way:
+  the function must output [state_exit,results], where state_exit should be
+  the exit state (or the exit state related to the nExit-th exit if it is a
+  splitter block. However at the moment only splitters with 2 output are
+  implemented) and results is a struct with whatever variable you want, for
+  example pump block can output the power in this way:
 
 results.power = <calculated_power>;
 
 The program will take care of printing the results correctly
 
-Be aware that states in all the functions are struct with these fields:
+Be aware that states in all the functions are structs with these fields:
 - mdot (double) [kg/s]
 - p (double) [bar]
 - T (double) [K]
 - rho (double) [kg/m^3]
-- composition (n(string) x 2(double) matrix with the first column being a
-  vector of string of the species inside the mixture and the second column
-  being the molar fractions of each species)
+- composition (struct containing the following fields:
+  - species (string array of the chemical species present in the mixture)
+  - n (molar fractions) 
 
 
 If you find bugs or errors please submit them
