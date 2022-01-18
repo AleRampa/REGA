@@ -36,15 +36,15 @@ To use REGA you must:
   parameters (like pressure ratio, efficiency, etc.) a line could be like
   the one below:
 
-% Type       Component number     mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]     composition
+% Type       Component number      mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]     composition
 
-  Tank              1               93.677              3                21                  70.220              H2
+  Tank              1                93.677              3                21                  70.220              H2
 
   Or for example:
 
-% Type       Component number      p ratio            eta
+% Type       Component number       p ratio            eta
 
-  Pump              1              29.1633            0.7
+  Pump              1               29.1633            0.7
 
   For input block one must specify the whole state with mdot, pressure,
   temperature, density and composition as a struct with the name of the
