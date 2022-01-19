@@ -379,6 +379,11 @@ if ~exist('cn','var')
     error('no input blocks found')
 end
 
+if size(conns,1) ~= length(states)
+    error("a problem arose while traversing the graph. Check for loops in "+...
+        "the diagram and change them as suggested in the README.md file")
+end
+
 if options.logtravellednodes
     % display the last block
     disp(count+": " + compInfo(lower(string(compInfo(:,1))) == blocks{cn}.type,2) + " " + blocks{cn}.compN)
@@ -531,7 +536,8 @@ fprintf("Finished traversing the graph\n")
         for ii = 1:length(blocks)
             if blocks{ii}.type == block.type
                 if blocks{ii}.nInput ~= block.nInput || blocks{ii}.nOutput ~= block.nOutput
-                    error("two blocks of the same type have different number of inputs or outputs")
+                    error("block %d and block %d are of the same type but "+...
+                    "have different number of inputs or outputs",block.nodeID,blocks{ii}.nodeID)
                 end
             end
         end
