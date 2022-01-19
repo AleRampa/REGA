@@ -12,11 +12,12 @@ compInfo = {...
     "Valve","Vlv",@Valve;
     "HeatExchanger","HeEx",@HeatExchanger;
     "Turbine","Trb",@Turbine;
-    "Nozzle","Nzl",@Nozzle;
+    "ConvergentNozzle","CoNzl",@ConvergentNozzle;
+    "DivergentNozzle","DiNzl",@DivergentNozzle;
     "Mixer","Mix",@Mixer;
     "CombustionChamber","CombC",@CombustionChamber};
 
-iFileName = "SE-21D_input.txt";
+iFileName = "SE-21D_inputData.txt";
 gFileName = "SE-21D.tgf";
 
 [blocks,states,travelledBlocks] = REGA(gFileName,iFileName,compInfo,...
