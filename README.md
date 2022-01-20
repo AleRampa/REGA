@@ -87,10 +87,9 @@ the loop at some point with an "Out" block and a "KnownState" block, where
 the loop ends and start respectively. "KnownState" block is equivalent to a
 "Tank" block
 
+Note2: splitter blocks choose as first output state the one with the
+smallest ID number associated to the state 
+
 If you find bugs or errors please submit them
 
-"With great power comes great responsibility"
-
 Thank you for your time reading this <3
-
-
