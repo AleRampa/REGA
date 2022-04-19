@@ -82,6 +82,8 @@ Be aware that states in all the functions are structs with these fields:
   - species (string array of the chemical species present in the mixture)
   - n (molar fractions) 
 
+This program works well with NFP and HGS from ManelSoria/INIST and ManelSoria/HGS
+
 Note: loops are not implemented yet. A way to avoid the problem is to break
 the loop at some point with an "Out" block and a "KnownState" block, where
 the loop ends and start respectively. "KnownState" block is equivalent to a
