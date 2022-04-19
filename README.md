@@ -1,5 +1,5 @@
 # REGA v1.1
-REGA (Rocket Engine Graph Analyzer) is a set of matlab function which 
+REGA (Rocket Engine Graph Analyzer) is a set of matlab functions which 
 facilitate the thermodynamic analysis of a rocket engine by reading its graph
 
 UPC - ESEIAAT - A.A. 2021\2022
