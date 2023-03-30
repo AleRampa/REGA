@@ -1,0 +1,64 @@
+% Input file
+% UPC - ESEIAAT - A.A. 2021\2022
+%
+% Author:
+%
+%       .o.       oooo                                                          .o8                               
+%      .888.      `888                                                         .888                              
+%     .8"888.      888   .ooooo.   .oooo.o  .oooo.o  .oooo.   ooo. .oo.    .oooo888  oooo d8b  .ooooo.           
+%    .8' `888.     888  d88' `88b d88(  "8 d88(  "8 `P  )88b  `888P"Y88b  d88' `888  `888"8P  d88' `88b       
+%   .88ooo8888.    888  888ooo888 `"Y88b.  `"Y88b.   .oP"888   888   888  888   888   888     888   888        
+%  .8'     `888.   888  888    .o o.  )88b o.  )88b d8(  888   888   888  888   888   888     888   888           
+% o88o     o8888o o888o `Y8bod8P'  8"888P'  8"888P' `Y888"8o  o888o o888o `Y8bod88P" d888b    `Y8bod8P'       
+%
+% ooooooooo.                                                                                    
+% `888   `Y88.                                                                                  
+%  888   .d88'  .oooo.   ooo. .oo.  .oo.   oo.ooooo.   .oooo.     oooooooo   oooooooo  .ooooo.  
+%  888ooo88P'  `P  )88b  `888P"Y88bP"Y88b   888' `88b `P  )88b   d'"7d8P    d'"7d8P   d88' `88b 
+%  888`88b.     .oP"888   888   888   888   888   888  .oP"888    .d8P'      .d8P'    888   888 
+%  888  `88b.  d8(  888   888   888   888   888   888 d8(  888   .d8P'  .P  .d8P'  .P 888   888 
+% o888o  o888o `Y888"8o  o888o o888o o888o  888bod8P' `Y888"8o d8888888P  d8888888P   `Y8bod8P' 
+%                                           888                                                 
+%                                          o888o  
+
+% Type	 Component number     mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]    composition
+Tank            1               93.677              3                 21	            70.220	             H2
+Tank            2               456.323             5                 90	            1143.036	         O2
+ 
+% Type	 Component number	       p ratio            eta
+Pump            1             	   29.1633            0.7
+Pump            2                  1.384              0.75
+Pump            3                  17.498             0.76
+Turbine         1                  27.7033            0.45
+Turbine         2                  27.7033            0.45
+
+% Type	 Component number     mdot ratio
+Splitter	    1               0.2121
+Splitter	    2               1.8832
+Splitter	    3               3.0484
+
+% Type           Component number       p ratio        deltaT
+HeatExchanger          1                 1.384    	   473.844 
+
+% Type	 Component number      p ratio
+Valve           1                 1
+Valve           2              1.0525
+Valve           3              1.0527
+Valve           4              1.0527
+Valve           5                 1
+
+% Type	 Component number      pressure [bar]
+Mixer           1                 83.12
+
+% Type               Component number      pressure [bar]    Qdot [MW]          eta
+CombustionChamber           1                 66.49		  	     0               0.9815
+
+% Type              Component number        Qdot [MW]       D_throat [m]         eta 
+ConvergentNozzle          1                  -0.111          0.490594             1
+ConvergentNozzle          2                    0             0.147129             1
+ConvergentNozzle          3                    0             0.252023             1
+
+% Type              Component number       Qdot [MW]   A ratio        D_exit [m]        eta
+DivergentNozzle           1                   0        12.586          1.74047          0.99
+DivergentNozzle           2                   0        1.651           0.189048         0.98
+DivergentNozzle           3                   0        1.657           0.324415         0.98
