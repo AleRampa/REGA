@@ -8,6 +8,12 @@ Author: Alessandro Rampazzo
 
 ## Why REGA
 
+Have you ever wondered how on earth rocket scientits understand liquid rocket engine diagrams like the one below?
+
+![image](https://user-images.githubusercontent.com/90860412/228891989-ed66f4f8-ecb5-4750-a26e-e823fd7ceff4.png)
+
+Well, me neither, and I'm one of them.
+
 To use REGA you must:
 
 - build your graph using for example yEd Graph Editor. Be aware that every
