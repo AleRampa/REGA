@@ -1,28 +1,12 @@
 # REGA v1.1
 REGA (Rocket Engine Graph Analyzer) is a set of matlab functions which 
-facilitate the thermodynamic analysis of a rocket engine by reading its graph
+facilitate the thermodynamic analysis of a liquid rocket engine by reading its graph
 
 UPC - ESEIAAT - A.A. 2021\2022
 
-Author:
+Author: Alessandro Rampazzo
 
-          .o.       oooo                                                          oo8                    
-         .888.      `888                                                         .888                    
-        .8"888.      888   .ooooo.   .oooo.o  .oooo.o  .oooo.   ooo. .oo.    .oooo888  oooo d8b  .ooooo. 
-       .8' `888.     888  d88' `88b d88(  "8 d88(  "8 `P  )88b  `888P"Y88b  d88' `888  `888"8P  d88' `88b
-      .88ooo8888.    888  888ooo888 `"Y88b.  `"Y88b.   .oP"888   888   888  888   888   888     888   888
-     .8'     `888.   888  888    .o o.  )88b o.  )88b d8(  888   888   888  888   888   888     888   888
-    o88o     o8888o o888o `Y8bod8P'  8"888P'  8"888P' `Y888"8o  o888o o888o `Y8bod88P" d888b    `Y8bod8P'
 
-    ooooooooo.                                                                                    
-    `888   `Y88.                                                                                  
-     888   .d88'  .oooo.   ooo. .oo.  .oo.   oo.ooooo.   .oooo.     oooooooo   oooooooo  .ooooo. 
-     888ooo88P'  `P  )88b  `888P"Y88bP"Y88b   888' `88b `P  )88b   d'"7d8P    d'"7d8P   d88' `88b
-     888`88b.     .oP"888   888   888   888   888   888  .oP"888    .d8P'      .d8P'    888   888
-     888  `88b.  d8(  888   888   888   888   888   888 d8(  888   .d8P'  .P  .d8P'  .P 888   888
-    o888o  o888o `Y888"8o  o888o o888o o888o  888bod8P' `Y888"8o d8888888P  d8888888P   `Y8bod8P'
-                                              888                                                 
-                                             o888o  
 
 To use REGA you must:
 
