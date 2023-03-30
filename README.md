@@ -28,6 +28,17 @@ For this reason we simplify the diagram taking only the most important component
 
 The image above is clearly still complex (the global thermodynamic variables of the fluid in each region don't help), but much cleaner than the original one.
 
+Actually one can build a diagram in a graph software (yEd for example) representing the simplified engine like this:
+
+![image](https://user-images.githubusercontent.com/90860412/228922523-b8ef0664-a389-4aee-b4e7-fde5faeba80e.png)
+
+Colors have been added to the lines to represent which fluids is meant to pass through them at nominal operative conditions. Note that each line is labelled with a different ascending number starting from 1 as is every component (in this case before the number the name of the component is added). Be sure that there are no typos since the software will read the numbers and the names you gave to the elements and will understand how to beahve.
+
+P.S. At the current version closed cycles are not implemented, since it would mean a jump in complexity and require time that currently I don't have :(
+At the moment closed loop cycles can be dealt by simply breaking the cycle and putting an input and output block next to each other (as it happens in the right side of the graph on the LOX feed line). Tank pressurization are also handled in this way. The only downside is that for this method to work at least one state in the loop must be known a priori.
+
+
+
 To use REGA you must:
 
 - build your graph using for example yEd Graph Editor. Be aware that every
