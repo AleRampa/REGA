@@ -32,12 +32,30 @@ Actually one can build a diagram in a graph software (yEd for example) represent
 
 ![image](https://user-images.githubusercontent.com/90860412/228922523-b8ef0664-a389-4aee-b4e7-fde5faeba80e.png)
 
-Colors have been added to the lines to represent which fluids is meant to pass through them at nominal operative conditions. Note that each line is labelled with a different ascending number starting from 1 as is every component (in this case before the number the name of the component is added). Be sure that there are no typos since the software will read the numbers and the names you gave to the elements and will understand how to beahve.
+Colors have been added to the lines to represent which fluids is meant to pass through them at nominal operative conditions. Note that each line is labelled with a different ascending number starting from 1 as is every component (in this case before the number the name of the component is added). Be sure that there are no typos since the software will read the numbers and the names you gave to the elements and will understand how to beahve. Every block you gave the same name will be treated as the same class of components. For example Turbine 1 and Turbine 2 will call the same function once the code meets them.
+
+The only thing left to do is to export the graph in a .tgf format
 
 P.S. At the current version closed cycles are not implemented, since it would mean a jump in complexity and require time that currently I don't have :(
 At the moment closed loop cycles can be dealt by simply breaking the cycle and putting an input and output block next to each other (as it happens in the right side of the graph on the LOX feed line). Tank pressurization are also handled in this way. The only downside is that for this method to work at least one state in the loop must be known a priori.
 
+## Matlab functions
 
+Before talking about the function themselves, we need to understand how the thermodynamic variables are assigned. Every line in the graph has a state associated with it, which in Matlab is implemented as a struct with the following fields:
+
+- mdot (double) [kg/s]
+- p (double) [bar]
+- T (double) [K]
+- rho (double) [kg/m^3]
+- composition (struct containing the following fields):
+  - species (string array of the chemical species present in the mixture)
+  - n (molar fractions) 
+  
+Given this, every block can recieve as many states as you specify in the graph (by terminating a line on it) and output at most two states (future version will implement unlimited output states).
+
+the template for a function is the following
+
+  
 
 To use REGA you must:
 
