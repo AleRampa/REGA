@@ -6,8 +6,6 @@ UPC - ESEIAAT - A.A. 2021\2022
 
 Author: Alessandro Rampazzo
 
-
-
 To use REGA you must:
 
 - build your graph using for example yEd Graph Editor. Be aware that every
