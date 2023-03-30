@@ -55,7 +55,9 @@ Given this, every block can recieve as many states as you specify in the graph (
 
 the template for a function is the following:
 
-  
+  function [state_exit,results] = CustomBlock(states,params)
+    ...
+  end
 
 To use REGA you must:
 
