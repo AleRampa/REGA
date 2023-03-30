@@ -51,9 +51,9 @@ Before talking about the function themselves, we need to understand how the ther
   - species (string array of the chemical species present in the mixture)
   - n (molar fractions) 
   
-Given this, every block can recieve as many states as you specify in the graph (by terminating a line on it) and output at most two states (future version will implement unlimited output states).
+Given this, every block can recieve as many states as you specify in the graph (by terminating a line on it) and output at most two states (by starting a line from it. future version will implement unlimited output states).
 
-the template for a function is the following
+the template for a function is the following:
 
   
 
