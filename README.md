@@ -10,10 +10,11 @@ Author: Alessandro Rampazzo
 
 Have you ever wondered how on earth rocket scientits understand liquid rocket engine diagrams like the one below?
 
-![image](https://user-images.githubusercontent.com/90860412/228891989-ed66f4f8-ecb5-4750-a26e-e823fd7ceff4.png)
-![image](https://user-images.githubusercontent.com/90860412/228915455-c9403bbf-c8a8-4420-ad58-ca6629732de8.png)
+![image](https://user-images.githubusercontent.com/90860412/228917424-7bbd1781-2086-456e-a021-8204c1d61ca4.png)
 
-Well, me neither, and I'm one of them.
+Well, me too, and I'm one of them.
+
+![image](https://user-images.githubusercontent.com/90860412/228891989-ed66f4f8-ecb5-4750-a26e-e823fd7ceff4.png)
 
 To use REGA you must:
 
