@@ -22,10 +22,11 @@ Fortunately REGA is here! This set of Matlab function reduce the analysis of suc
 The above diagram is definetly too detailed and complicated to analyze directly and there are many unnecessary fluidic lines that are not fundamental to capture the thermodynamics of the engine such as hydraulic, purge and dump lines.
 
 For this reason we simplify the diagram taking only the most important components, the one that play a significant role in determining the steady state condition of the system. We end up with something like this:
+
 ![image](https://user-images.githubusercontent.com/90860412/228891989-ed66f4f8-ecb5-4750-a26e-e823fd7ceff4.png)
 <sup><sub>Image from Herbertz, Armin. "Component Modeling for Rocket Engine Cycle Analysis." Transactions of the Japan Society for Aeronautical and Space Sciences, Aerospace Technology Japan 14. 2016</sub></sup>
 
-
+The image above is clearly still complex (the global thermodynamic variables of the fluid in each region don't help), but much cleaner than the original one.
 
 To use REGA you must:
 
