@@ -51,11 +51,42 @@ Before talking about the function themselves, we need to understand how the ther
   - species (string array of the chemical species present in the mixture)
   - n (molar fractions) 
   
-Given this, every block can recieve as many states as you specify in the graph (by terminating a line on it) and output at most two states (future version will implement unlimited output states).
+Given this, every block can recieve as many states as you specify in the graph (by terminating a line on it) and output at most two states (by starting a line from it. future version will implement unlimited output states).
 
-the template for a function is the following
+the template for a function is the following:
 
-  
+    function [stateOut,results] = CustomBlock(statesIn,nExit,params)
+      ...
+    end
+    
+Where:
+  - statesIn is a state or a list of states (struct list) given as inputs to the function (the number of inputs, as said before, is determined by the topology of the graph)
+  - nExit is a number from 1 to 2 (in the current version) which represents which one of the exiting line is requested. The code always goes for the lines with the smallest number first, so in case of a Splitter 1 in the graph above, nExit = 1 will be linked to line 5 and nExit = 2 to line 15
+  - params is a vector containing the parameters of the specific block in the given order as written in the input.txt file (see below)
+  - stateOut is the computed requested output state. The output state MUST have all the field input states have.
+  - results is a struct with arbitrary numerical fields which can be used to output some informations (power of turbines, efficiencies, etc) if they are not explicitly available at input level. REGA will take care of printing these results in the command window once the anslysis is completed.
+
+## Input file
+
+The input file specifies the actual parameters (params variable) of every block.
+
+There are three types of blocks:
+- input blocks
+- regular blocks
+- output blocks
+
+Starting from the easiest, output blocks state the end of a path and do not need any specifications or parameters.
+Input blocks (such as KnownState or Tank blocks in the SSME diagram) must befine the entire state as follows:
+
+    % Type       Component number      mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]     composition
+     Tank               1                93.677              3                21                  70.220              H2
+
+While for regular blocks a parameter definition example is this:
+
+    % Type       Component number       p ratio            eta
+     Pump               1               29.1633            0.7
+
+It must be noted that the line with the % is only for informations purpuses since the software will skip it and read the following as type - component number - params (vector)
 
 To use REGA you must:
 
