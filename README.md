@@ -15,10 +15,17 @@ Have you ever wondered how on earth rocket scientits understand liquid rocket en
 
 Well, me too, and I'm one of them. The image above is the flow diagram of the RS-25, also know as the SSME or Space Shuttle Main Engine (now you recall huh) and it would be definetly a pain (and definetely has been) to thermodynamically analyze it from top to bottom.
 
-Fortunately REGA is here! This set of Matlab function reduce the analysis of such engines to drawing a graph, write some functions for the individual components and define some input variable in a text file.
+Fortunately REGA is here! This set of Matlab function reduce the analysis of such engines to drawing a graph, write some functions for the individual components and define some input variable in a text file. Let's step through the passages to get this things working
 
+## The graph
+
+The above diagram is definetly too detailed and complicated to analyze directly and there are many unnecessary fluidic lines that are not fundamental to capture the thermodynamics of the engine such as hydraulic, purge and dump lines.
+
+For this reason we simplify the diagram taking only the most important components, the one that play a significant role in determining the steady state condition of the system. We end up with something like this:
 ![image](https://user-images.githubusercontent.com/90860412/228891989-ed66f4f8-ecb5-4750-a26e-e823fd7ceff4.png)
 <sup><sub>Image from Herbertz, Armin. "Component Modeling for Rocket Engine Cycle Analysis." Transactions of the Japan Society for Aeronautical and Space Sciences, Aerospace Technology Japan 14. 2016</sub></sup>
+
+
 
 To use REGA you must:
 
