@@ -81,81 +81,66 @@ Input blocks (such as KnownState or Tank blocks in the SSME diagram) must befine
     % Type       Component number      mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]     composition
      Tank               1                93.677              3                21                  70.220              H2
 
+REGA classifies them as input block because no line terminates on them (the same but reversed for output blocks)
+
 While for regular blocks a parameter definition example is this:
 
     % Type       Component number       p ratio            eta
      Pump               1               29.1633            0.7
 
-It must be noted that the line with the % is only for informations purpuses since the software will skip it and read the following as type - component number - params (vector)
+It must be noted that the line with the % is only for informations purpuses since the software will skip it and read the following as type - component number - params (vector) (in future version the params input could be changed to a struct with the corresponding fields specified in the input file)
 
-To use REGA you must:
+## Linking all toghether
 
-- build your graph using for example yEd Graph Editor. Be aware that every
-  line needs a unique ID number and every block needs a name and a
-  component number. Save the file in .tgf format.
+To link blocks and functions toghether, as well as specify the input file, the following bit of code is needed:
 
-- define the specification for every block (except output blocks) in the
-  input file. Every input block (tanks for example) needs to specify the
-  state exiting the block, while other components only need extra
-  parameters (like pressure ratio, efficiency, etc.) a line could be like
-  the one below:
+    clc
+    clear
+    close all
 
-% Type       Component number      mdot [kg/s]      pressure [bar]   temperature [K]     density [kg/m^3]     composition
+    addpath("../")
+    addpath("../functions")
+    addpath("../HGS-main")
+    addpath("../NFP-main")
 
-  Tank              1                93.677              3                21                  70.220              H2
+    % To run the script you need:
+    % - .tgf file of the graph
+    % - .txt file of the input parameters
+    % - set of functions for every block
 
-  Or for example:
+    % associating name of the block to nickname and function
+    compInfo = {...
+        "Tank","Tnk",0;
+        "Out","Out",0;
+        "KnownState","KnSt",0;
+        "H2_Pump","H2_Pmp",@Pump;
+        "O2_Pump","O2_Pmp",@Pump;
+        "Splitter","Spl",@Splitter;
+        "Valve","Vlv",@Valve;
+        "H2_HeatExchanger","H2_HeEx",@HeatExchanger_A;
+        "O2_HeatExchanger","O2_HeEx",@HeatExchanger_A;
+        "H2_Turbine","H2_Trb",@Turbine;
+        "O2_Turbine","O2_Trb",@Turbine;
+        "ConvergentNozzle","CoNzl",@ConvergentNozzle_A;
+        "DivergentNozzle","DiNzl",@DivergentNozzle_A;   
+        "Mixer","Mix",@Mixer;
+        "H2_Preburner","H2_PreB",@CombustionChamber;
+        "O2_Preburner","O2_PreB",@CombustionChamber;
+        "CombustionChamber","CombC",@CombustionChamber};
 
-% Type       Component number       p ratio            eta
+    % input file
+    iFileName = "SSME_InputData.txt";
 
-  Pump              1               29.1633            0.7
+    % graph file
+    gFileName = "SSME.tgf";
 
-  For input block one must specify the whole state with mdot, pressure,
-  temperature, density and composition as a struct with the name of the
-  pure substances and the relative molar fractions
-  The program will read through the file and will pass a vector containing
-  the input states and the parameters specified in the input file in the
-  order they were given to the relative function associated to the block
+    [blocks,states,travelledBlocks] = REGA(gFileName,iFileName,compInfo);
 
-- Specify the names of the blocks, the nickname and the associated function
-  as suggested from the command ">> help REGA"
+Where we define the component information in a data structures like above (first column is the EXACT name of the component in the graph, second a nickname and third the handle to the function associated with the block), specify the input and graph file and then call REGA with everything.
+Blocks and states are list of all computed blocks and states, while travelledBlocks is a ordered list of all the blocks REGA has passed through or requested states. In addition it prints a summary of all the states and blocks to give a rapid feedback on the computation
 
-- Define the functions related to every block type by creating a matlab 
-  function that takes as inputs: 
-  * (state1,params) if the inputs are 1     
-  * ([state1,state2,...,stateN],params) if the inputs are > 1 (first 
-    argument is a struct array)
-  * (state1,nExit,params) if it's a splitter block that takes 1 input
+Now press run and enjoy automatic rocket engine graph calculations :)
 
-  the function must output [state_exit,results], where state_exit should be
-  the exit state (or the exit state related to the nExit-th exit if it is a
-  splitter block. However at the moment only splitters with 2 output are
-  implemented) and results is a struct with whatever variable you want, for
-  example pump block can output the power in this way:
+This project relies on NFP and HGS from ManeSoria/INIST and ManelSoria/HGS
 
-results.power = <calculated_power>;
-
-The program will take care of printing the results correctly
-
-Be aware that states in all the functions are structs with these fields:
-- mdot (double) [kg/s]
-- p (double) [bar]
-- T (double) [K]
-- rho (double) [kg/m^3]
-- composition (struct containing the following fields:
-  - species (string array of the chemical species present in the mixture)
-  - n (molar fractions) 
-
-This program works well with NFP and HGS from ManelSoria/INIST and ManelSoria/HGS
-
-Note: loops are not implemented yet. A way to avoid the problem is to break
-the loop at some point with an "Out" block and a "KnownState" block, where
-the loop ends and start respectively. "KnownState" block is equivalent to a
-"Tank" block
-
-Note2: splitter blocks choose as first output state the one with the
-smallest ID number associated to the state 
-
-If you find bugs or errors please submit them
-
-Thank you for your time reading this <3
+Thank you for your time reading this
