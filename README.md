@@ -36,8 +36,8 @@ Colors have been added to the lines to represent which fluids is meant to pass t
 
 The only thing left to do is to export the graph in a .tgf format
 
-P.S. At the current version closed cycles are not implemented, since it would mean a jump in complexity and require time that currently I don't have :(
-At the moment closed loop cycles can be dealt by simply breaking the cycle and putting an input and output block next to each other (as it happens in the right side of the graph on the LOX feed line). Tank pressurization are also handled in this way. The only downside is that for this method to work at least one state in the loop must be known a priori.
+P.S. At the current version closed cycles are not implemented, since it would mean a jump in complexity and would require time that I currently don't have :(
+At the moment closed loops can be dealt by simply breaking the cycle and putting an input and output block next to each other (as it happens in the right side of the graph on the blue LOX feed line). Tank pressurization are also handled in this way. The only downside is that for this method to work at least one state in the loop must be known a priori.
 
 ## Matlab functions
 
