@@ -137,7 +137,7 @@ To link blocks and functions toghether, as well as specify the input file, the f
     [blocks,states,travelledBlocks] = REGA(gFileName,iFileName,compInfo);
 
 Where we define the component information in a data structures like above (first column is the EXACT name of the component in the graph, second a nickname and third the handle to the function associated with the block), specify the input and graph file and then call REGA with everything.
-Blocks and states are list of all computed blocks and states, while travelledBlocks is a ordered list of all the blocks REGA has passed through or requested states. In addition it prints a summary of all the states and blocks to give a rapid feedback on the computation
+Blocks and states are list of all computed blocks and states, while travelledBlocks is a ordered lists of all the blocks REGA has passed through or requested states with all the parameters and calculated results. In addition it prints a summary of all the states and blocks to give a rapid feedback on the computation
 
 Now press run and enjoy automatic rocket engine graph calculations :)
 
