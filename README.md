@@ -32,7 +32,7 @@ Actually one can build a diagram in a graph software (yEd for example) represent
 
 ![image](https://user-images.githubusercontent.com/90860412/228922523-b8ef0664-a389-4aee-b4e7-fde5faeba80e.png)
 
-Colors have been added to the lines to represent which fluids is meant to pass through them at nominal operative conditions. Note that each line is labelled with a different ascending number starting from 1 as is every component (in this case before the number the name of the component is added). Be sure that there are no typos since the software will read the numbers and the names you gave to the elements and will understand how to beahve. Every block you gave the same name will be treated as the same class of components. For example Turbine 1 and Turbine 2 will call the same function once the code meets them.
+Colors have been added to the lines to represent which fluids is meant to pass through them at nominal operative conditions. Note that each line is labelled with a different ascending number starting from 1 as is every component (in this case before the number the name of the component is added). Be sure that there are no typos since the software will read the numbers and the names you gave to the elements and will understand how to behave. Every block you gave the same name will be treated as the same class of components. For example Turbine 1 and Turbine 2 will call the same function once the code meets them.
 
 The only thing left to do is to export the graph in a .tgf format
 
