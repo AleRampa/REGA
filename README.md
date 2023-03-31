@@ -8,7 +8,7 @@ Author: Alessandro Rampazzo
 
 ## Why REGA
 
-Have you ever wondered how on earth rocket scientits understand liquid rocket engine graphs like the one below?
+Have you ever wondered how on earth rocket scientits understand nightmarish liquid rocket engine graphs like the one below?
 
 ![image](https://user-images.githubusercontent.com/90860412/228917424-7bbd1781-2086-456e-a021-8204c1d61ca4.png)
 <sup><sub>Image from NASA: https://gandalfddi.z19.web.core.windows.net/Shuttle/SSME_MPS_Info/KSC-SSME_System_Eng_Handbook.pdf</sub></sup>
