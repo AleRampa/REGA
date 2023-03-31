@@ -64,7 +64,7 @@ Where:
   - nExit is a number from 1 to 2 (in the current version) which represents which one of the exiting line is requested. The code always goes for the lines with the smallest number first, so in case of a Splitter 1 in the graph above, nExit = 1 will be linked to line 5 and nExit = 2 to line 15
   - params is a vector containing the parameters of the specific block in the given order as written in the input.txt file (see below)
   - stateOut is the computed requested output state. The output state MUST have all the field input states have.
-  - results is a struct with arbitrary numerical fields which can be used to output some informations (power of turbines, efficiencies, etc) if they are not explicitly available at input level. REGA will take care of printing these results in the command window once the anslysis is completed.
+  - results is a struct with arbitrary numerical fields which can be used to output some informations (power of turbines, efficiencies, etc) if they are not explicitly available at input level. REGA will take care of printing these results in the command window once the analysis is completed.
 
 ## Input file
 
